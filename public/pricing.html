@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | Halal Rizq Khidmaat LLP</title>
+<meta name="description" content="Halal certification fee structure and fee estimator.">
+<link rel="icon" href="/images/logo.jpeg">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="container" style="padding-top:32px">
+  <h1>Fee structure</h1>
+  <div class="cards" id="fee-cards"><p>Loading fees...</p></div>
+  <div class="panel" style="max-width:none;margin:16px 0">
+    <h2 style="margin-top:0">Estimate your fee</h2>
+    <div id="estimator">
+      <div class="row">
+        <div><label for="products">Number of products</label><input id="products" type="number" min="1" value="5"></div>
+        <div><label for="days">Audit days</label><input id="days" type="number" min="1" value="1"></div>
+      </div>
+      <label><input id="logo" type="checkbox" style="width:auto"> Include Halal logo licence</label>
+    </div>
+    <div class="alert success fee-total" id="estimate"></div>
+    <small>Indicative rates. The final amount is confirmed after your application is reviewed.</small>
+    <p><a class="btn" href="/apply">Apply online</a></p>
+  </div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="/js/app.js"></script>
+<script src="/js/pricing.js"></script>
+</body>
+</html>
