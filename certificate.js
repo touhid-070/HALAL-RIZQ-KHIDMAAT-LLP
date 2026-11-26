@@ -4,7 +4,7 @@ const QRCode = require("qrcode");
 const fs = require("fs/promises");
 const path = require("path");
 
-const BASE_URL = () => (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
+const BASE_URL = () => (process.env.BASE_URL || process.env.RENDER_EXTERNAL_URL || "http://localhost:3000").replace(/\/$/, "");
 const verifyUrl = (certNo) => `${BASE_URL()}/verify/${certNo}`;
 const qrPng = (certNo, width = 300) => QRCode.toBuffer(verifyUrl(certNo), { margin: 1, width });
 

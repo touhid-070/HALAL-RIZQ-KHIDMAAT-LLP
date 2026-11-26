@@ -10,6 +10,10 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const { buildCertificatePdf, qrPng } = require("./certificate");
 
+if (process.env.NODE_ENV === "production" && !process.env.AUTH_SECRET) {
+  throw new Error("AUTH_SECRET must be set in production.");
+}
+
 const PORT = process.env.PORT || 3000;
 const SECRET = process.env.AUTH_SECRET || "dev-secret-change-me";
 const SCHEMES = ["Product Manufacturer", "Food Premises (Restaurant / Caterer)", "Outlet / Hotel", "Abattoir / Slaughterhouse"];
@@ -22,6 +26,9 @@ db.exec(fs.readFileSync(path.join(__dirname, "database", "schema.sql"), "utf8"))
 
 // Create the first admin account if none exists
 if (!db.prepare("SELECT 1 FROM users WHERE role='admin'").get()) {
+  if (process.env.NODE_ENV === "production" && (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD)) {
+    throw new Error("Set ADMIN_EMAIL and ADMIN_PASSWORD before starting in production.");
+  }
   const email = (process.env.ADMIN_EMAIL || "admin@halalrizq.in").toLowerCase();
   const pass = process.env.ADMIN_PASSWORD || "ChangeThisPassword123";
   db.prepare("INSERT OR IGNORE INTO users (name,email,password_hash,role) VALUES (?,?,?, 'admin')")
